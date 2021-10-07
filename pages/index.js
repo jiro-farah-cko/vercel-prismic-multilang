@@ -20,6 +20,7 @@ export async function getStaticProps(context) {
       data: homepageData?.data || null,
       previewRef,
       id: homepageData?.id || null,
+      revalidate: 1,
     },
   };
 }
