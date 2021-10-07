@@ -2,24 +2,24 @@ import { getSingleTypeData } from "../utils/prismic";
 import { RichText } from "prismic-reactjs";
 import useUpdatePreviewRef from "../utils/useUpdatePreviewRef";
 
-export default function Home({ data, previewRef, id }) {
+export default function About({ data, previewRef, id }) {
   useUpdatePreviewRef(previewRef, id);
   if (data) {
     return <>{RichText.asText(data.title)}</>;
   }
-  return <h1>homepage -</h1>;
+  return <h1>about -</h1>;
 }
 
 export async function getStaticProps(context) {
   const { previewData, locale } = context;
   const previewRef = previewData ? previewData.ref : null;
-  const homepageData = await getSingleTypeData("home", previewRef, locale);
+  const aboutPageData = await getSingleTypeData("about", previewRef, locale);
 
   return {
     props: {
-      data: homepageData?.data || null,
+      data: aboutPageData?.data || null,
       previewRef,
-      id: homepageData?.id || null,
+      id: aboutPageData?.id || null,
     },
   };
 }
