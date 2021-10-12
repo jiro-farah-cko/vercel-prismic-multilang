@@ -15,6 +15,12 @@ export async function getStaticProps(context) {
   const previewRef = previewData ? previewData.ref : null;
   const homepageData = await getSingleTypeData("home", previewRef, locale);
 
+  if (!homepageData) {
+    return {
+      notFound: true,
+    };
+  }
+
   return {
     props: {
       data: homepageData?.data || null,
