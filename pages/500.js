@@ -5,7 +5,6 @@ export default function Custom500() {
 }
 
 export async function getStaticProps(context) {
-  /* Making an api  request to mimic what we have on our error page */
   const { previewData, locale } = context;
   const previewRef = previewData ? previewData.ref : null;
   const homepageData = await getSingleTypeData("home", previewRef, locale);
