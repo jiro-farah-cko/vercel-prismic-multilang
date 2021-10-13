@@ -7,9 +7,9 @@ export default function linkResolver(doc) {
     return `/${doc.lang}/about`;
   }
 
+  if (doc.type === "dynamic") {
+    return `/${doc.lang}/${doc.uid}`;
+  }
+
   return "/";
 }
-
-//  if (doc.type === "page") {
-//    return `/${doc.lang}/${doc.uid}`;
-//  }
