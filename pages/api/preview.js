@@ -2,18 +2,17 @@ import Client from "../../prismic-config"; // import from wherever this is set
 import linkResolver from "../../utils/linkResolver"; // import from wherever this is set
 
 const Preview = async (req, res) => {
-  const { token: ref, documentId } = req.query;
+  const { token: localPrismicRef, documentId } = req.query;
   const redirectUrl = await Client(req)
-    .getPreviewResolver(ref, documentId)
+    .getPreviewResolver(localPrismicRef, documentId)
     .resolve(linkResolver, "/");
 
-  res.setPreviewData({ ref });
+  if (!redirectUrl) {
+    return res.status(401).json({ message: "Invalid token" });
+  }
 
-  res.write(
-    `<!DOCTYPE html><html><head><meta http-equiv="Refresh" content="0; url=${redirectUrl}" />
-    <script>window.location.href = '${redirectUrl}'</script>
-    </head>`
-  );
+  res.setPreviewData({ localPrismicRef });
+  res.writeHead(302, { Location: `${redirectUrl}` });
   res.end();
 };
 

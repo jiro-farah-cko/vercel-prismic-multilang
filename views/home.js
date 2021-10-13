@@ -19,6 +19,7 @@ export async function getStaticProps(context) {
     context.statusCode = 404;
     return {
       notFound: true,
+      revalidate: 60,
     };
   }
 
