@@ -7,7 +7,7 @@ export default function About({ data, previewRef, id }) {
   if (data) {
     return <>{RichText.asText(data.title)}</>;
   }
-  return <h1>about -</h1>;
+  return null;
 }
 
 export async function getStaticProps(context) {

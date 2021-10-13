@@ -7,7 +7,7 @@ export default function Home({ data, previewRef, id }) {
   if (data) {
     return <>{RichText.asText(data.title)}</>;
   }
-  return <h1>homepage -</h1>;
+  return null;
 }
 
 export async function getStaticProps(context) {
@@ -16,6 +16,7 @@ export async function getStaticProps(context) {
   const homepageData = await getSingleTypeData("home", previewRef, locale);
 
   if (!homepageData) {
+    context.statusCode = 404;
     return {
       notFound: true,
     };
